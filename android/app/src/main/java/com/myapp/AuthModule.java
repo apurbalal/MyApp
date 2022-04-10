@@ -31,7 +31,7 @@ public class AuthModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createCredential(final Promise promise) {
+    public void enroll(final Promise promise) {
         mPromise = promise;
         BiometricManager biometricManager = BiometricManager.from(getReactApplicationContext());
         switch (biometricManager.canAuthenticate(DEVICE_CREDENTIAL)) {

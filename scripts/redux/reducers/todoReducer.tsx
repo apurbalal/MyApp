@@ -6,6 +6,8 @@ import {
 
 const initialState: any = {
   todo: [],
+  loading: false,
+  savingTodo: false,
 };
 
 export const todoReducer = (state = initialState, action: any) => {

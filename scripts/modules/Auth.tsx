@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect} from 'react';
+import React from 'react';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {
   Button,
@@ -11,32 +11,14 @@ import {
   Platform,
 } from 'react-native';
 import {StackActions} from '@react-navigation/native';
-import {SCENE_NAME} from '../constants';
+import {SCREEN_NAME} from '../constants';
 
-const Comp = (props: any) => {
-  const checkDeviceForHardware = async () => {
-    const compatible = await LocalAuthentication.hasHardwareAsync();
-    if (compatible) {
-      console.log('Apurbalal compatible');
-    } else {
-      console.log('Apurbalal not compatible');
-    }
-  };
+interface Props {
+  setAuthenticated: (value: boolean) => void;
+  navigation: any;
+}
 
-  const checkForBiometrics = async () => {
-    const biometricRecords = await LocalAuthentication.isEnrolledAsync();
-    if (biometricRecords) {
-      console.log('Apurbalal biometric compatible');
-    } else {
-      console.log('Apurbalal biometric not compatible');
-    }
-  };
-
-  useEffect(() => {
-    checkDeviceForHardware();
-    checkForBiometrics();
-  }, []);
-
+const Comp = (props: Props) => {
   const authenticate = async () => {
     try {
       const results = await LocalAuthentication.authenticateAsync({
@@ -45,15 +27,14 @@ const Comp = (props: any) => {
         fallbackLabel: 'Fall back label',
         disableDeviceFallback: false,
       });
+
       if (results.success) {
-        props?.authenticated(true);
-        props?.navigation.dispatch(StackActions.replace(SCENE_NAME.Todo));
+        props.setAuthenticated(true);
+        props.navigation.dispatch(StackActions.replace(SCREEN_NAME.Todo));
       } else if (results.error === 'not_enrolled') {
         if (Platform.OS === 'android') {
           const {AuthModule} = NativeModules;
-          AuthModule.createCredential().then((result: any) =>
-            console.log(result),
-          );
+          AuthModule.enroll().then((result: any) => console.log(result));
         }
       } else if (results.error === 'unknown') {
       } else if (
@@ -69,7 +50,7 @@ const Comp = (props: any) => {
   return (
     <SafeAreaView style={styles.masterContainer}>
       <View style={styles.container}>
-        <Text style={{marginBottom: 12}}>Set Authentication to proceed</Text>
+        <Text style={{marginBottom: 12}}>Need authentication to proceed</Text>
         <Button onPress={authenticate} title={'Authenticate'} />
       </View>
     </SafeAreaView>

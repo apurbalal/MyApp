@@ -7,7 +7,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  authenticated: (value: boolean) => {
+  setAuthenticated: (value: boolean) => {
     dispatch(authenticated(value));
   },
 });

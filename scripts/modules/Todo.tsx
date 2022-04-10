@@ -13,7 +13,17 @@ import {
   Platform,
 } from 'react-native';
 
-const Comp = (props: any) => {
+interface Props {
+  todo: Array<string>;
+  loading?: boolean;
+  addTodo: (data: string) => void;
+  storeTodo: () => any;
+  removeTodo: (index: number) => void;
+  fetchTodo: () => any;
+  autoSaving: boolean;
+}
+
+const Comp = (props: Props) => {
   const [todoText, setTodoText] = useState('');
 
   const addData = () => {
@@ -46,9 +56,9 @@ const Comp = (props: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={props.todo}
+        data={props?.todo}
         renderItem={renderItem}
-        refreshing={props.loading}
+        refreshing={props?.loading}
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
