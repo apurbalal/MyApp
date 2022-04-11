@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
     backgroundColor: 'red',
-    textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -123,11 +122,8 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 8,
     paddingHorizontal: 12,
-    overflow: 'hidden',
     backgroundColor: 'blue',
-    textAlign: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
   keyboardView: {
     padding: 18,
@@ -135,7 +131,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderTopWidth: 1,
     borderTopColor: 'rgba(0, 0, 0, 0.1)',
-    alignItems: 'center',
   },
   container: {
     backgroundColor: 'white',

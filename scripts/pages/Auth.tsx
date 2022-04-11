@@ -69,16 +69,14 @@ const styles = StyleSheet.create({
   },
   masterContainer: {
     flex: 1,
+    backgroundColor: 'white',
   },
   button: {
     height: 40,
     borderRadius: 8,
     paddingHorizontal: 12,
-    overflow: 'hidden',
     backgroundColor: 'blue',
-    textAlign: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
