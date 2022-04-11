@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+import {TodoButtonText} from '../constants';
 
 interface Props {
   todo: Array<string>;
@@ -25,7 +26,7 @@ interface Props {
 
 const Comp = (props: Props) => {
   const [todoText, setTodoText] = useState('');
-  const [buttonText, setButtonText] = useState('Add');
+  const [buttonText, setButtonText] = useState(TodoButtonText.ADD);
   const [editIndex, setEditIndex] = useState<number>(-1);
 
   const removeData = (index: number) => {
@@ -40,24 +41,25 @@ const Comp = (props: Props) => {
 
   const setButtonStateAdd = () => {
     setEditIndex(-1);
-    setButtonText('Add');
+    setButtonText(TodoButtonText.ADD);
     setTodoText('');
   };
 
   const setButtonStateUpdate = (index: number, text: string) => {
     setEditIndex(index);
-    setButtonText('Update');
+    setButtonText(TodoButtonText.UPDATE);
     setTodoText(text);
   };
 
   // Toggle button between edit and update mode
   const toggleEdit = (index: number, text: string) =>
-    buttonText === 'Update' && index === editIndex
+    buttonText === TodoButtonText.UPDATE && index === editIndex
       ? setButtonStateAdd()
       : setButtonStateUpdate(index, text);
 
+  // update or add todo based on button text
   const handleButtonPress = () => {
-    if (buttonText === 'Update') {
+    if (buttonText === TodoButtonText.UPDATE) {
       props.updateTodo(todoText, editIndex);
     } else {
       props.addTodo(todoText);

@@ -2,7 +2,7 @@
 import React from 'react';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {
-  Button,
+  TouchableOpacity,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -11,7 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import {StackActions} from '@react-navigation/native';
-import {SCREEN_NAME} from '../constants';
+import {ScreenName} from '../constants';
 
 interface Props {
   setAuthenticated: (value: boolean) => void;
@@ -27,7 +27,7 @@ const Comp = (props: Props) => {
       if (results.success) {
         // If user is authenticated save the state and go to Todo screen
         props.setAuthenticated(true);
-        props.navigation.dispatch(StackActions.replace(SCREEN_NAME.Todo));
+        props.navigation.dispatch(StackActions.replace(ScreenName.TODO));
       } else if (results.error === 'not_enrolled') {
         // if user not_enrolled Android use AuthModule enroll
         // You can check AuthModule.java to check AuthModule implementation
@@ -50,7 +50,9 @@ const Comp = (props: Props) => {
     <SafeAreaView style={styles.masterContainer}>
       <View style={styles.container}>
         <Text style={{marginBottom: 12}}>Need authentication to proceed</Text>
-        <Button onPress={authenticate} title={'Authenticate'} />
+        <TouchableOpacity onPress={authenticate} style={styles.button}>
+          <Text style={{color: 'white'}}>Authenticate</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -65,6 +67,16 @@ const styles = StyleSheet.create({
   },
   masterContainer: {
     flex: 1,
+  },
+  button: {
+    height: 40,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    overflow: 'hidden',
+    backgroundColor: 'blue',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

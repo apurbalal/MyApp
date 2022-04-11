@@ -1,4 +1,9 @@
-export const SCREEN_NAME = {
-  Auth: 'Authentication',
-  Todo: 'Todo',
+export const ScreenName = {
+  AUTH: 'Authentication',
+  TODO: 'Todo',
+};
+
+export const TodoButtonText = {
+  UPDATE: 'Update',
+  ADD: 'ADD',
 };
