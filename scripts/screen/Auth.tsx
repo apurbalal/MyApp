@@ -3,7 +3,7 @@ import {authenticated} from '../redux/actions';
 import Auth from '../pages/Auth';
 
 const mapStateToProps = (state: any) => ({
-  authenticated: state.authentication.authenticated,
+  authenticated: state?.authentication?.authenticated,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
