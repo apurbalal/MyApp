@@ -49,7 +49,6 @@ public class AuthModule extends ReactContextBaseJavaModule {
     private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {
         @Override
         public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent intent) {
-            Log.d("Biometric", requestCode+""+ resultCode);
             if (requestCode == INTENT_CREATE_SCREEN_LOCK) {
                 if (resultCode == BiometricManager.BIOMETRIC_SUCCESS) {
                     mPromise.resolve("success");
