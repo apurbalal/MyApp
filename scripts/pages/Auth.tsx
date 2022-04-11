@@ -12,10 +12,12 @@ import {
 } from 'react-native';
 import {StackActions} from '@react-navigation/native';
 import {ScreenName} from '../constants';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../screen/App';
 
 interface Props {
   setAuthenticated: (value: boolean) => void;
-  navigation: any;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Auth', undefined>;
 }
 
 const Comp = (props: Props) => {

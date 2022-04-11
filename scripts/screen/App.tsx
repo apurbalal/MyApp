@@ -15,18 +15,22 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Auth from './Auth';
 import Todo from './Todo';
 import store from '../redux/store';
-import {ScreenName} from '../constants';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Auth: {};
+  Todo: {};
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => (
   <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={ScreenName.AUTH}
+        initialRouteName={'Auth'}
         screenOptions={{headerBackVisible: false}}>
-        <Stack.Screen name={ScreenName.AUTH} component={Auth} />
-        <Stack.Screen name={ScreenName.TODO} component={Todo} />
+        <Stack.Screen name={'Auth'} component={Auth} />
+        <Stack.Screen name={'Todo'} component={Todo} />
       </Stack.Navigator>
     </NavigationContainer>
   </Provider>
