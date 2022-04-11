@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {authenticated} from '../redux/actions';
-import Auth from '../modules/Auth';
+import Auth from '../pages/Auth';
 
 const mapStateToProps = (state: any) => ({
   authenticated: state?.authentication?.authenticated,
