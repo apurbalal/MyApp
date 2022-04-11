@@ -29,3 +29,7 @@ For handling Async tasks
 #### Native module
 In Android expo-local-authentication throws error when screenlock is not set. In order to enroll user, created AuthModule in Android. AuthModule handle enrolling user.
 Check how to write Android native module: https://reactnative.dev/docs/native-modules-android
+
+#### State management
+1. Redux store to manage Todo and User auth state
+2. React state to manage component specific state
