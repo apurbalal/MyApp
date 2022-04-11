@@ -17,5 +17,5 @@ export const StoreTodoActionTypes = {
 };
 
 export const AuthActionTypes = {
-  authenticated: 'authenticated',
+  set_authenticated: 'set_authenticated',
 };

@@ -1,6 +1,6 @@
 import {AuthActionTypes} from './actionTypes';
 
 export const authenticated = (value: boolean) => ({
-  type: AuthActionTypes.authenticated,
+  type: AuthActionTypes.set_authenticated,
   payload: value,
 });

@@ -8,15 +8,24 @@ const mockStore = configureStore(middlewares);
 
 describe('account reducer', () => {
   it('should return the initial state', () => {
-    expect(todoReducer(undefined, {})).toEqual({todo: []});
+    expect(todoReducer(undefined, {})).toEqual({
+      todo: [],
+      loading: false,
+      savingTodo: false,
+    });
   });
 
-  const initialState = {todo: ['Hello world'], savingTodo: false};
+  const initialState = {
+    todo: ['Hello world'],
+    savingTodo: false,
+    loading: false,
+  };
 
   it('should handle add_todo', () => {
     expect(todoReducer(initialState, addTodo('Hello world 2'))).toEqual({
       todo: ['Hello world', 'Hello world 2'],
       savingTodo: false,
+      loading: false,
     });
   });
 
@@ -24,6 +33,7 @@ describe('account reducer', () => {
     expect(todoReducer(initialState, removeTodo(0))).toEqual({
       todo: [],
       savingTodo: false,
+      loading: false,
     });
   });
 
@@ -31,6 +41,7 @@ describe('account reducer', () => {
     expect(todoReducer(initialState, setTodo(['Todo 3']))).toEqual({
       todo: ['Todo 3'],
       savingTodo: false,
+      loading: false,
     });
   });
 
@@ -38,7 +49,7 @@ describe('account reducer', () => {
     const store = mockStore(initialState);
     store.dispatch(fetchTodo() as any).then(() => {
       const state = store.getState();
-      expect(state).toEqual({todo: [], savingTodo: false});
+      expect(state).toEqual({todo: [], savingTodo: false, loading: false});
     });
   });
 
