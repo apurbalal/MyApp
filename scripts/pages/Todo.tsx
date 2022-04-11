@@ -32,6 +32,7 @@ const Comp = (props: Props) => {
   const removeData = (index: number) => {
     props.removeTodo(index);
     props.storeTodo();
+    setButtonStateAdd();
   };
 
   useEffect(() => {
