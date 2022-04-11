@@ -5,5 +5,5 @@ export const ScreenName = {
 
 export const TodoButtonText = {
   UPDATE: 'Update',
-  ADD: 'ADD',
+  ADD: 'Add',
 };
