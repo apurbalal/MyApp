@@ -21,12 +21,7 @@ interface Props {
 const Comp = (props: Props) => {
   const authenticate = async () => {
     try {
-      const results = await LocalAuthentication.authenticateAsync({
-        promptMessage: 'Authenticate',
-        cancelLabel: 'Cancel',
-        fallbackLabel: 'Fall back label',
-        disableDeviceFallback: false,
-      });
+      const results = await LocalAuthentication.authenticateAsync();
 
       if (results.success) {
         props.setAuthenticated(true);
