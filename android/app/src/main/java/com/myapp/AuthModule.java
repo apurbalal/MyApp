@@ -5,7 +5,6 @@ import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTI
 import android.app.Activity;
 import android.content.Intent;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.biometric.BiometricManager;
 
