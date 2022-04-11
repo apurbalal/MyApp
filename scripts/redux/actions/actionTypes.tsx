@@ -2,6 +2,8 @@ export const TodoActionTypes = {
   add_todo: 'add_todo',
   remove_todo: 'remove_todo',
   set_todo: 'set_todo',
+  update_todo: 'update_todo',
+  set_button_state: 'set_button_state',
 };
 
 export const FetchTodoActionTypes = {

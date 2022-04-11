@@ -1,4 +1,10 @@
-import {addTodo, fetchTodo, removeTodo, storeTodo} from '../redux/actions';
+import {
+  addTodo,
+  fetchTodo,
+  removeTodo,
+  storeTodo,
+  updateTodo,
+} from '../redux/actions';
 import {connect} from 'react-redux';
 import Todo from '../pages/Todo';
 
@@ -17,6 +23,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
   fetchTodo: () => dispatch(fetchTodo()),
   storeTodo: () => dispatch(storeTodo()),
+  updateTodo: (data: string, index: number) =>
+    dispatch(updateTodo(data, index)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo);

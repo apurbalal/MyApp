@@ -6,6 +6,7 @@ import {
   removeTodo,
   setTodo,
   storeTodo,
+  updateTodo,
 } from '../todoActions';
 import {
   TodoActionTypes,
@@ -65,4 +66,12 @@ it('save todos', () => {
 
     expect(actions).toEqual(expected);
   });
+});
+
+it('update todo', () => {
+  const expectedAction = {
+    type: TodoActionTypes.update_todo,
+    payload: {data: 'Hello world', index: 0},
+  };
+  expect(updateTodo('Hello world', 0)).toEqual(expectedAction);
 });

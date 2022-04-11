@@ -19,6 +19,13 @@ export const todoReducer = (state = initialState, action: any) => {
       newArray.splice(action.payload, 1);
       return {...state, todo: newArray};
     }
+    case TodoActionTypes.update_todo: {
+      const newArray = Array.from(state.todo);
+      if (action.payload.index >= 0 && action.payload.index < newArray.length) {
+        newArray[action.payload.index] = action.payload.data;
+      }
+      return {...state, todo: newArray};
+    }
     case TodoActionTypes.set_todo:
       return {...state, todo: action.payload};
 

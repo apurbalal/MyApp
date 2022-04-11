@@ -21,12 +21,16 @@ interface Props {
 const Comp = (props: Props) => {
   const authenticate = async () => {
     try {
+      // Attempts to authenticate via Fingerprint/TouchID (or FaceID if available on the device).
       const results = await LocalAuthentication.authenticateAsync();
 
       if (results.success) {
+        // If user is authenticated save the state and go to Todo screen
         props.setAuthenticated(true);
         props.navigation.dispatch(StackActions.replace(SCREEN_NAME.Todo));
       } else if (results.error === 'not_enrolled') {
+        // if user not_enrolled Android use AuthModule enroll
+        // You can check AuthModule.java to check AuthModule implementation
         if (Platform.OS === 'android') {
           const {AuthModule} = NativeModules;
           AuthModule.enroll().then((result: any) => console.log(result));

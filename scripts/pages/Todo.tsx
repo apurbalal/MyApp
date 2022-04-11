@@ -2,7 +2,6 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import {
-  View,
   Text,
   TouchableOpacity,
   FlatList,
@@ -21,16 +20,13 @@ interface Props {
   removeTodo: (index: number) => void;
   fetchTodo: () => any;
   autoSaving: boolean;
+  updateTodo: (data: string, index: number) => void;
 }
 
 const Comp = (props: Props) => {
   const [todoText, setTodoText] = useState('');
-
-  const addData = () => {
-    props.addTodo(todoText);
-    setTodoText('');
-    props.storeTodo();
-  };
+  const [buttonText, setButtonText] = useState('Add');
+  const [editIndex, setEditIndex] = useState<number>(-1);
 
   const removeData = (index: number) => {
     props.removeTodo(index);
@@ -42,15 +38,48 @@ const Comp = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const setButtonStateAdd = () => {
+    setEditIndex(-1);
+    setButtonText('Add');
+    setTodoText('');
+  };
+
+  const setButtonStateUpdate = (index: number, text: string) => {
+    setEditIndex(index);
+    setButtonText('Update');
+    setTodoText(text);
+  };
+
+  // Toggle button between edit and update mode
+  const toggleEdit = (index: number, text: string) =>
+    buttonText === 'Update' && index === editIndex
+      ? setButtonStateAdd()
+      : setButtonStateUpdate(index, text);
+
+  const handleButtonPress = () => {
+    if (buttonText === 'Update') {
+      props.updateTodo(todoText, editIndex);
+    } else {
+      props.addTodo(todoText);
+    }
+    setButtonStateAdd();
+    props.storeTodo();
+  };
+
   const renderItem = ({item, index}: {item: string; index: number}) => (
-    <View style={styles.row}>
+    <TouchableOpacity
+      style={[
+        styles.row,
+        {backgroundColor: editIndex === index ? 'lightgray' : 'white'},
+      ]}
+      onPress={() => toggleEdit(index, item)}>
       <Text style={{flex: 1}}>{item}</Text>
       <TouchableOpacity
         onPress={() => removeData(index)}
-        style={[styles.button, styles.redBackground]}>
+        style={styles.removeButton}>
         <Text style={{color: 'white'}}>-</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -69,8 +98,8 @@ const Comp = (props: Props) => {
           onChangeText={setTodoText}
           style={styles.input}
         />
-        <TouchableOpacity onPress={addData} style={styles.button}>
-          <Text style={{color: 'white'}}>+</Text>
+        <TouchableOpacity onPress={handleButtonPress} style={styles.button}>
+          <Text style={{color: 'white'}}>{buttonText}</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -78,21 +107,25 @@ const Comp = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
+  removeButton: {
     height: 24,
     width: 24,
     borderRadius: 12,
+    overflow: 'hidden',
+    backgroundColor: 'red',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    height: 40,
+    borderRadius: 8,
+    paddingHorizontal: 12,
     overflow: 'hidden',
     backgroundColor: 'blue',
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  redBackground: {
-    backgroundColor: 'red',
-  },
-  blueBackground: {
-    backgroundColor: 'blue',
   },
   keyboardView: {
     padding: 18,
@@ -110,7 +143,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderColor: 'rgba(0, 0, 0, 0.1)',
     borderWidth: 1,
-    padding: 12,
+    height: 40,
+    paddingHorizontal: 8,
     borderRadius: 8,
     marginRight: 12,
   },

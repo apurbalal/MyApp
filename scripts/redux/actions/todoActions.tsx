@@ -20,6 +20,11 @@ export const setTodo = (data: Array<string>) => ({
   payload: data,
 });
 
+export const updateTodo = (data: string, index: number) => ({
+  type: TodoActionTypes.update_todo,
+  payload: {data, index},
+});
+
 export const fetchTodo = () => {
   return async (dispatch: any) => {
     try {

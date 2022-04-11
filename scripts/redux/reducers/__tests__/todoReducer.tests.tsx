@@ -1,7 +1,13 @@
 import {todoReducer} from '../todoReducer';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {addTodo, fetchTodo, removeTodo, setTodo} from '../../actions';
+import {
+  addTodo,
+  fetchTodo,
+  removeTodo,
+  setTodo,
+  updateTodo,
+} from '../../actions';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -59,5 +65,20 @@ describe('account reducer', () => {
       const state = store.getState();
       expect(state).toEqual(initialState);
     });
+  });
+
+  it('should update todos when index within range', () => {
+    expect(
+      todoReducer(initialState, updateTodo('Hello world updated', 0)),
+    ).toEqual({
+      ...initialState,
+      todo: ['Hello world updated'],
+    });
+  });
+
+  it('should not update todos when index out of range', () => {
+    expect(
+      todoReducer(initialState, updateTodo('Hello world updated', 10)),
+    ).toEqual(initialState);
   });
 });
