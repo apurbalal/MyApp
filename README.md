@@ -33,3 +33,7 @@ Check how to write Android native module: https://reactnative.dev/docs/native-mo
 #### State management
 1. Redux store to manage Todo and User auth state
 2. React state to manage component specific state
+
+## Screen recording
+
+<img src="https://user-images.githubusercontent.com/9425881/162672232-13e32d20-fcd0-499d-b12c-2be1fd63f7d5.gif" width="400">
