@@ -15,7 +15,7 @@ import {TodoButtonText} from '../constants';
 
 interface Props {
   todo: Array<string>;
-  loading?: boolean;
+  loading: boolean;
   addTodo: (data: string) => void;
   storeTodo: () => any;
   removeTodo: (index: number) => void;
@@ -89,7 +89,7 @@ const Comp = (props: Props) => {
       <FlatList
         data={props?.todo}
         renderItem={renderItem}
-        refreshing={props?.loading}
+        refreshing={props.loading}
       />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
